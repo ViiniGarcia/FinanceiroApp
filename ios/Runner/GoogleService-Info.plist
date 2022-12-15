@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>361090128531-f77ve24rs64ied2jsnpbm9r3nbt0eatq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.361090128531-f77ve24rs64ied2jsnpbm9r3nbt0eatq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCA51bxJoRlGxZRLOPLqxT1jAN0PgQ_-Bk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>361090128531</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.vinicius.financeiro.financeiro</string>
+	<key>PROJECT_ID</key>
+	<string>financeiro-aba8a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>financeiro-aba8a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:361090128531:ios:664b340e549f836dd20b66</string>
+</dict>
+</plist>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "361090128531",
+    "firebase_url": "https://financeiro-aba8a-default-rtdb.firebaseio.com",
+    "project_id": "financeiro-aba8a",
+    "storage_bucket": "financeiro-aba8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:361090128531:android:79475596b3711292d20b66",
+        "android_client_info": {
+          "package_name": "com.vinicius.financeiro.financeiro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "361090128531-vscj6p1vpnntbvcrpnqramg2058j4f9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWClwrhShkkIOUMGuKIqNkSTBEcHiPnT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "361090128531-vscj6p1vpnntbvcrpnqramg2058j4f9r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "361090128531-f77ve24rs64ied2jsnpbm9r3nbt0eatq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vinicius.financeiro.financeiro"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

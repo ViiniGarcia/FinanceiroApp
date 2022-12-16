@@ -608,6 +608,8 @@ PODS:
     - firebase_core
     - FlutterMacOS
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - dynamic_color (0.0.2):
+    - FlutterMacOS
   - Firebase/CoreOnly (10.2.0):
     - FirebaseCore (= 10.2.0)
   - Firebase/Firestore (10.2.0):
@@ -710,6 +712,7 @@ PODS:
 
 DEPENDENCIES:
   - cloud_firestore (from `Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos`)
+  - dynamic_color (from `Flutter/ephemeral/.symlinks/plugins/dynamic_color/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - path_provider_macos (from `Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos`)
@@ -733,6 +736,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   cloud_firestore:
     :path: Flutter/ephemeral/.symlinks/plugins/cloud_firestore/macos
+  dynamic_color:
+    :path: Flutter/ephemeral/.symlinks/plugins/dynamic_color/macos
   firebase_core:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
   FlutterMacOS:
@@ -744,6 +749,7 @@ SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cloud_firestore: 5bfd8f92a2f11f9d25a0ee69303ca069cadc7637
+  dynamic_color: 394d6a888650f8534e029b27d2f8bc5c64e44008
   Firebase: a3ea7eba4382afd83808376edb99acdaff078dcf
   firebase_core: f6f75d92dcdd5ef1b43876017affde02b7b402ec
   FirebaseCore: 813838072b797b64f529f3c2ee35e696e5641dd1

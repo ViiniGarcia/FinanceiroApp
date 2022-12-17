@@ -6,13 +6,13 @@ class Gastos {
   String nome;
   double valor;
   bool isFixo;
-  Timestamp mesInicio; //TODO Trocar para data inicio;
+  Timestamp mesInicio;
   int qtdParcelas;
 
   Gastos(this.nome, this.valor, this.isFixo, this.mesInicio, this.qtdParcelas);
 
   quantasParcelasFaltam() {
-    var tempo;
+    String tempo;
     var inicio = mesInicio.toDate();
     var atual = DateTime.now();
 

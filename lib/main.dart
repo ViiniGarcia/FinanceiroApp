@@ -24,6 +24,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Financeiro',
       theme: ThemeData(
+        cardColor: Theme.of(context).colorScheme.surface,
+        indicatorColor: const Color(0XFF6750A4),
         colorScheme: const ColorScheme.light(),
         tabBarTheme: const TabBarTheme(
           labelColor: Colors.black,
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       darkTheme: ThemeData(
+        indicatorColor: const Color(0XFFD0BCFF),
         colorScheme: const ColorScheme.dark(),
         useMaterial3: true,
       ),

@@ -3,13 +3,14 @@ import 'package:intl/intl.dart';
 
 ///Classe para Gastos
 class Gastos {
-  String nome;
-  double valor;
-  bool isFixo;
-  Timestamp mesInicio;
-  int qtdParcelas;
+  late String nome;
+  late double valor;
+  late bool isFixo;
+  late Timestamp mesInicio;
+  late bool isParcelado;
+  late int? qtdParcelas;
 
-  Gastos(this.nome, this.valor, this.isFixo, this.mesInicio, this.qtdParcelas);
+  Gastos(this.nome, this.valor, this.isFixo, this.mesInicio, this.isParcelado, this.qtdParcelas);
 
   quantasParcelasFaltam() {
     String tempo;

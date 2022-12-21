@@ -23,15 +23,13 @@ class _PrincipalState extends State<Principal> with TickerProviderStateMixin {
   List<Gastos> listGastosFixo = [];
   List<Gastos> listGastosVariaveis = [];
   List<Tab> tabs = <Tab>[
-    Tab(text: _proxMeses(DateTime.now(), 0)),
-    Tab(text: _proxMeses(DateTime.now(), 1)),
-    Tab(text: _proxMeses(DateTime.now(), 2)),
+    Tab(text: DateFormat.MMMM().format(_proxMeses(0))),
+    Tab(text: DateFormat.MMMM().format(_proxMeses(1))),
+    Tab(text: DateFormat.MMMM().format(_proxMeses(2))),
   ];
 
   @override
   void initState() {
-    //Atualização inicial
-    atualizar();
     //Atualização em tempo real
     db.collection("gastos").snapshots().listen((query) {
       listGastosFixo = [];
@@ -39,7 +37,7 @@ class _PrincipalState extends State<Principal> with TickerProviderStateMixin {
       for (var doc in query.docs) {
         setState(() {
           Gastos gasto = Gastos(doc.get("nome"), doc.get("valor").toDouble(),
-              doc.get("isFixo"), doc.get("mesInicio"), doc.get("qtdParcelas"));
+              doc.get("isFixo"), doc.get("mesInicio"), doc.get("isParcelado"), doc.get("qtdParcelas"));
           gasto.isFixo == true
               ? listGastosFixo.add(gasto)
               : listGastosVariaveis.add(gasto);
@@ -65,33 +63,22 @@ class _PrincipalState extends State<Principal> with TickerProviderStateMixin {
           body: TabBarView(
             controller: _tabController,
             children: [
-              MonthPage(_proxMeses(DateTime.now(), 0), listGastosFixo,
+              MonthPage(_proxMeses(0), DateFormat.MMMM().format(_proxMeses(0)), listGastosFixo,
                   listGastosVariaveis, db),
-              MonthPage(_proxMeses(DateTime.now(), 1), listGastosFixo,
+              MonthPage(_proxMeses(1), DateFormat.MMMM().format(_proxMeses(1)), listGastosFixo,
                   listGastosVariaveis, db),
-              MonthPage(_proxMeses(DateTime.now(), 2), listGastosFixo,
+              MonthPage(_proxMeses(2), DateFormat.MMMM().format(_proxMeses(2)), listGastosFixo,
                   listGastosVariaveis, db),
             ],
           ),
         ),
     );
   }
-
-  void atualizar() async {
-    QuerySnapshot query = await db.collection("gastos").get();
-
-    for (var element in query.docs) {
-      String name = element.get("teste");
-      setState(() {
-        listGastosFixo.add(element.get("teste"));
-      });
-    }
-  }
 }
 
-String _proxMeses(mesAtual, int qtdMeses) {
+DateTime _proxMeses(int qtdMeses) {
   var hoje = DateTime.now();
-  var mes = DateFormat.MMMM()
-      .format(DateTime(hoje.year, hoje.month + qtdMeses, hoje.day));
+  var mes = DateTime(hoje.year, hoje.month + qtdMeses, hoje.day);
   return mes;
 }
+

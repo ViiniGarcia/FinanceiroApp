@@ -47,6 +47,7 @@ dependencies:
 
   uuid: ^3.0.6
   dynamic_color: ^1.5.4
+  date_time_picker: ^2.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:financeiro/models/gastos.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class MonthPage extends StatefulWidget {
-  MonthPage(this.tabName, this.listFixos, this.listVariaveis, this.db,
+  MonthPage(this.tabDate, this.tabName, this.listFixos, this.listVariaveis, this.db,
       {Key? key})
       : super(key: key);
 
   var db;
+  final DateTime tabDate;
   final String tabName;
   final List<Gastos> listFixos;
   final List<Gastos> listVariaveis;
@@ -19,7 +21,14 @@ class MonthPage extends StatefulWidget {
 
 class _MonthPageState extends State<MonthPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final _nome = TextEditingController();
+  final _valor = TextEditingController();
   bool _isFixo = false;
+  bool _isParcelado = false;
+  final _qtdParcelas = TextEditingController();
+
+  late Gastos gasto;
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +154,7 @@ class _MonthPageState extends State<MonthPage> {
   }
 
   _listaGastos(String tabName, List<Gastos> gastos) {
+    //gastos.removeWhere((gasto) => gasto.mesInicio == )
     return ListView.builder(
       itemCount: gastos.length,
       shrinkWrap: true,
@@ -189,19 +199,21 @@ class _MonthPageState extends State<MonthPage> {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: const Text("test"),
+            title: const Text("Adicionar Gasto"),
             contentPadding: const EdgeInsetsDirectional.all(20),
             children: [
               StatefulBuilder(
                   builder: (BuildContext context, StateSetter setState) {
                 return Form(
+                  key: _formKey,
                     child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     TextFormField(
                       decoration: const InputDecoration(
                         hintText: 'Nome',
                       ),
+                      controller: _nome,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Campo não preenchido';
@@ -213,6 +225,8 @@ class _MonthPageState extends State<MonthPage> {
                       decoration: const InputDecoration(
                         hintText: 'Valor',
                       ),
+                      controller: _valor,
+                      keyboardType: TextInputType.number,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Campo não preenchido';
@@ -222,24 +236,61 @@ class _MonthPageState extends State<MonthPage> {
                     ),
                     Row(
                       children: [
-                        Text("teste"),
                         Switch(
+                            activeColor: Theme.of(context).colorScheme.primary,
                             value: _isFixo,
                             onChanged: (value) {
                               setState(() {
                                 _isFixo = value;
                               });
                             }),
+                        const Text("Fixo"),
                       ],
+                    ),
+                    Row(
+                      children: [
+                        Switch(
+                            activeColor: Theme.of(context).colorScheme.primary,
+                            value: _isParcelado,
+                            onChanged: (value) {
+                              setState(() {
+                                _isParcelado = value;
+                              });
+                            }),
+                        const Text("Com Parcelamento"),
+                      ],
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Quantidade de Parcelas',
+                      ),
+                      controller: _qtdParcelas,
+                      keyboardType: TextInputType.number,
+                      validator: (String? value) {
+                        if (value == null && _isParcelado == true) {
+                          return 'Campo não preenchido';
+                        }
+                        return null;
+                      },
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ElevatedButton(
+                      child: TextButton(
                         onPressed: () {
-                          salvaBanco();
-                          // if (_formKey.currentState!.validate()) {
-                          //   //TODO colocar codigo
-                          // }
+                          if (_formKey.currentState!.validate()) {
+                            DateTime hoje = DateTime.now();
+
+                            gasto = Gastos(
+                                _nome.text,
+                                double.parse(_valor.text),
+                                _isFixo,
+                                Timestamp.fromDate(widget.tabDate),
+                                _isParcelado,
+                                _qtdParcelas.text.isNotEmpty ? int?.parse(_qtdParcelas.text) : 0
+                            );
+
+                            salvaGasto(gasto);
+                          }
                         },
                         child: const Text('Salvar'),
                       ),
@@ -252,16 +303,27 @@ class _MonthPageState extends State<MonthPage> {
         });
   }
 
-  void salvaBanco() {
+  _calendario() {
+    return DateTimePicker(
+      type: DateTimePickerType.date,
+      dateMask: 'dd/MM/yyyy',
+      initialValue: DateTime.now().toString(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+      icon: const Icon(Icons.event),
+    );
+  }
+
+  void salvaGasto(Gastos gasto) {
     //Gera ID
     String id = const Uuid().v1();
-
     widget.db.collection("gastos").doc(id).set({
-      "nome": "Teste",
-      "valor": 1200,
-      "isFixo": true,
-      "mesInicio": Timestamp.now(),
-      "qtdParcelas": 0,
+      "nome": gasto.nome,
+      "valor": gasto.valor,
+      "isFixo": gasto.isFixo,
+      "mesInicio": gasto.mesInicio,
+      "isParcelado": gasto.isParcelado,
+      "qtdParcelas": gasto.qtdParcelas,
     });
   }
 }

@@ -15,6 +15,8 @@ class MonthPage extends StatefulWidget {
   final List<Gastos> listFixos;
   final List<Gastos> listVariaveis;
 
+
+
   @override
   State<MonthPage> createState() => _MonthPageState();
 }
@@ -289,7 +291,7 @@ class _MonthPageState extends State<MonthPage> {
                                 _qtdParcelas.text.isNotEmpty ? int?.parse(_qtdParcelas.text) : 0
                             );
 
-                            salvaGasto(gasto);
+                            adicionaGasto(gasto);
                           }
                         },
                         child: const Text('Salvar'),
@@ -314,7 +316,7 @@ class _MonthPageState extends State<MonthPage> {
     );
   }
 
-  void salvaGasto(Gastos gasto) {
+  void adicionaGasto(Gastos gasto) {
     //Gera ID
     String id = const Uuid().v1();
     widget.db.collection("gastos").doc(id).set({
